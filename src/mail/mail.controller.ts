@@ -33,7 +33,7 @@ import { MailIds, StarUnstarBody } from './dtos/mail.dto';
 export class MailController {
   private readonly logger = new Logger('Mail Controller');
 
-  constructor(private readonly mailService: MailService) { }
+  constructor(private readonly mailService: MailService) {}
 
   @Post('')
   @UseGuards(AuthGuard)
@@ -298,13 +298,13 @@ export class MailController {
     summary: 'Mark All Mails as read',
     description: '',
   })
-  @ApiResponse({ status: 201, description: 'Marked read all Email successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'Marked read all Email successfully',
+  })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
   @ApiResponse({ status: 500, description: 'Internal Server Error' })
-  async MarkAllMailAsRead(
-    @Req() req,
-    @Res() res,
-  ): Promise<void> {
+  async MarkAllMailAsRead(@Req() req, @Res() res): Promise<void> {
     try {
       await this.mailService.markAllAsRead(req.user.userId);
 

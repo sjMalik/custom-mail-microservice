@@ -10,10 +10,12 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot([{
-      ttl: 60000, // time to live in milliseconds
-      limit: 10,  // maximum number of requests within the ttl
-    }]),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000, // time to live in milliseconds
+        limit: 10, // maximum number of requests within the ttl
+      },
+    ]),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -35,10 +37,12 @@ import { APP_GUARD } from '@nestjs/core';
     MailModule,
   ],
   controllers: [AppController],
-  providers: [AppService, {
-    provide: APP_GUARD,
-    useClass: ThrottlerGuard
-  }
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}

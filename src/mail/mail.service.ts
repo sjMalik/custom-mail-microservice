@@ -24,7 +24,7 @@ export class MailService {
     private readonly mailRepository: Repository<Mail>,
     @InjectRepository(MailUsers)
     private readonly mailUsersRepository: Repository<MailUsers>,
-  ) { }
+  ) {}
 
   async createDraftMail(
     createDraftMailDto: CreateDraftMailDto,
@@ -312,10 +312,7 @@ export class MailService {
       .execute();
   }
 
-  async markAsRead(
-    userId: number,
-    mailIds: number[]
-  ): Promise<void> {
+  async markAsRead(userId: number, mailIds: number[]): Promise<void> {
     const uniqueMailIds = [...new Set(mailIds)];
 
     await this.mailUsersRepository
@@ -329,9 +326,7 @@ export class MailService {
       .execute();
   }
 
-  async markAllAsRead(
-    userId: number,
-  ): Promise<void> {
+  async markAllAsRead(userId: number): Promise<void> {
     await this.mailUsersRepository
       .createQueryBuilder()
       .update(MailUsers)
