@@ -20,6 +20,9 @@ import entities from './typeorm';
         database: configService.get('DB_NAME'),
         entities: entities,
         synchronize: true,
+        ssl: {
+          rejectUnauthorized: false, // You may need to set this to true in production with proper certificates
+        },
       }),
       inject: [ConfigService],
     }),
@@ -28,4 +31,4 @@ import entities from './typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
